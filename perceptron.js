@@ -8,20 +8,22 @@ const TRUTH_TABLE = [
 
 const TARGET = [1, -1, -1, -1];
 
-const WEIGHT = [0, 0, 0];
+let WEIGHT = [0, 0, 0];
 
-let functionYent = [];
+let functionYent;
 
-let alpha = 1;
+const alpha = 1;
 const threshold = 0.2;
 
 let hasWeightVariation = true;
+
+let weightVariation = [[], [], [], []];
 
 let teste = 0;
 
 function handle() {
   while (hasWeightVariation) {
-    
+
     for (let line = 0; line < 4; line++) {
       let yent = 0;
 
@@ -29,23 +31,51 @@ function handle() {
         yent += parseInt(TRUTH_TABLE[line][column] * WEIGHT[column]);
       }
 
-      yent += + TRUTH_TABLE[line][2];
 
-      functionYent.push(yent);
+      console.log('yent ->', yent);
 
-      if (functionYent[line] === TARGET[line]) {
-        hasWeightVariation = false;
-        break;
-      }
+      if (yent > threshold) functionYent = 1;
+      else if (yent <= threshold && yent >= threshold * -1) functionYent = 0;
+      else functionYent = -1;
 
-      WEIGHT[0] = alpha * (TARGET[line] - functionYent[line]) * TRUTH_TABLE[line][0];
-      WEIGHT[1] = alpha * (TARGET[line] - functionYent[line]) * TRUTH_TABLE[line][1];
-      WEIGHT[2] = alpha * (TARGET[line] - functionYent[line]) * TRUTH_TABLE[line][2];
+      console.log('fyent -> ', functionYent);
+
+      let wVariationFirstPart = parseInt(alpha * (TARGET[line] - functionYent));
+
+      weightVariation[line][0] = parseInt(wVariationFirstPart * TRUTH_TABLE[line][0]);
+      weightVariation[line][1] = parseInt(wVariationFirstPart * TRUTH_TABLE[line][1]);
+      weightVariation[line][2] = parseInt(wVariationFirstPart * TRUTH_TABLE[line][2]);
+
+      WEIGHT[0] += parseInt(weightVariation[line][0]);
+      WEIGHT[1] += parseInt(weightVariation[line][1]);
+      WEIGHT[2] += parseInt(weightVariation[line][2]);  
+
     }
-  
-    teste += 1;
-  }
+    console.log('-----------Fim da época-----------')
 
+    let done = true;
+
+    for (let i = 0; i < 4; i++) {
+      for (let j = 0; j < 3; j++) {
+        console.log('variacao -> ', weightVariation[i][j]);
+        if (weightVariation[i][j] !== 0) {
+          done = false;
+          break;
+        }
+      }
+      if (!done) break;
+    }
+
+
+    if (!done) {
+      teste += 1;
+    }
+    else {
+      teste += 1;
+      hasWeightVariation = false;
+    }
+  }
+  
   console.log('gera -> ', teste);
 }
 
