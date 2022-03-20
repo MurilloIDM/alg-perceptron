@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;900&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="styles/index.css">
+  <link rel="stylesheet" href="./styles/index.css">
   <title>Algoritmo Perceptron</title>
 </head>
 
@@ -39,104 +39,13 @@
         </select>
       </div>
 
-      <button>Executar</button>
+      <button id="execute-button">Executar</button>
     </div>
 
-    <section class="tables">
-      <div class="container-table">
-        <h2>Geração 1</h2>
-
-        <table>
-          <thead>
-            <th>x1</th>
-            <th>x2</th>
-            <th>x3</th>
-            <th>1</th>
-            <th>t</th>
-            <th>ΔW1</th>
-            <th>ΔW2</th>
-            <th>ΔW3</th>
-            <th>ΔWb</th>
-            <th>W1</th>
-            <th>W2</th>
-            <th>b</th>
-            <th>Yent</th>
-            <th>f(Yent)</th>
-          </thead>
-
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-              <td>2</td>
-              <td>2</td>
-              <td>2</td>
-              <td>2</td>
-              <td>2</td>
-              <td>2</td>
-              <td>2</td>
-              <td>2</td>
-              <td>0</td>
-              <td>-1</td>
-            </tr>
-
-            <tr>
-              <td>1</td>
-              <td>-1</td>
-              <td>1</td>
-              <td>-1</td>
-              <td>-2</td>
-              <td>2</td>
-              <td>-2</td>
-              <td>0</td>
-              <td>4</td>
-              <td>0</td>
-              <td>2</td>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-            </tr>
-
-            <tr>
-              <td>1</td>
-              <td>-1</td>
-              <td>1</td>
-              <td>-1</td>
-              <td>-2</td>
-              <td>2</td>
-              <td>-2</td>
-              <td>0</td>
-              <td>4</td>
-              <td>0</td>
-              <td>2</td>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-            </tr>
-
-            <tr>
-              <td>1</td>
-              <td>-1</td>
-              <td>1</td>
-              <td>-1</td>
-              <td>-2</td>
-              <td>2</td>
-              <td>-2</td>
-              <td>0</td>
-              <td>4</td>
-              <td>0</td>
-              <td>2</td>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
+    <section id="tables"></section>
   </main>
 </body>
+
+<script type="module" src="./js/perceptron.js"></script>
 
 </html>

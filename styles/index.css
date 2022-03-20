@@ -93,7 +93,7 @@ main .form-dashboard {
   filter: brightness(0.9);
 }
 
-.tables {
+#tables {
   margin-top: 48px;
 }
 
@@ -105,17 +105,18 @@ main .form-dashboard {
 
 .container-table {
   overflow-y: auto;
+  margin-bottom: 32px;
 }
 
 .container-table table {
   width: 100%;
-  padding: 0.75rem;
+  padding: 0.75rem 0;
   margin-top: 16px;
   min-width: 1000px;
   border-spacing: 0 0.5rem;
 }
 
-.container-table table tr {
+.container-table table tr, .container-table table thead {
   background: var(--shape);
 }
 
@@ -131,12 +132,12 @@ main .form-dashboard {
   padding: 8px 4px;
 }
 
-.container-table table tr td:first-child, .container-table table tr th:first-child {
+.container-table table tr td:first-child, .container-table table thead th:first-child {
   border-top-left-radius: 0.5rem;
   border-bottom-left-radius: 0.5rem;
 }
 
-.container-table table tr td:last-child, .container-table table tr th:last-child {
+.container-table table tr td:last-child, .container-table table thead th:last-child {
   border-top-right-radius: 0.5rem;
   border-bottom-right-radius: 0.5rem;
 }

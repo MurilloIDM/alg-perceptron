@@ -1,20 +1,40 @@
-const DATA = require("./data_input.json");
+import { createTable } from "./createTable.js";
+import { DATA } from "./dataInput.js";
 
 const alpha = 1;
 const threshold = 0.2;
 
-function handle(operation) {
+const button = document.getElementById("execute-button");
+button.addEventListener("click", getOptions);
+
+function getOptions() {
+  const operation = document.getElementById("operation").value;
+  const inputType = document.getElementById("input-type").value;
+
+  handler(operation, inputType);
+}
+
+function handler(operation, inputType) {
+  console.log("operation -> ", operation);
   // Declaração e inicialização de variáveis
   let fYent = null;
   let generation = 0;
   let WEIGHT = [0, 0, 0];
   let hasWeightVariation = true;
-  let weightVariation = [[], [], [], []];
+  
   
   // Captura da tabela verdade e alvos de acordo com a operação (AND, OR ou XOR)
   const { TRUTH_TABLE, TARGET } = DATA[operation];
-
+  
   while (hasWeightVariation) {
+    const allYent = [];
+    const allFYent = [];
+    const allWeights = [];
+    const allVariations = [];
+    let weightVariation = [[], [], [], []];
+    
+    generation += 1;
+
     for (let line = 0; line < 4; line++) {
       let yent = 0;
 
@@ -36,20 +56,22 @@ function handle(operation) {
       // Atualização dos valores dos pesos
       WEIGHT[0] += parseInt(weightVariation[line][0]);
       WEIGHT[1] += parseInt(weightVariation[line][1]);
-      WEIGHT[2] += parseInt(weightVariation[line][2]);  
+      WEIGHT[2] += parseInt(weightVariation[line][2]);
+
+      allYent.push(yent);
+      allFYent.push(fYent);
+      allWeights.push(WEIGHT);
     }
     
-    const done = noWeightVariation(weightVariation);
+    createTable(generation, TRUTH_TABLE, TARGET, allWeights, allYent, allFYent, weightVariation);
 
-    generation += 1;
+    const done = noWeightVariation(weightVariation);
 
     if (done) {
       hasWeightVariation = false;
       continue;
     }
   }
-  
-  console.log(`Operação ${operation} => ${generation} gerações.`);
 }
 
 function getFYent(yent) {
@@ -77,7 +99,3 @@ function noWeightVariation(weightVariation) {
 
   return done;
 }
-
-handle("AND");
-// handle("OR");
-// handle("XOR");
