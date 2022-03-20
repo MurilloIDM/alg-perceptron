@@ -1,0 +1,160 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --background: #F0F2F5;
+  --green: #33cc95;
+  --red: #E52E4D;
+  --blue: #5429CC;
+  --blue-light: #6933FF;
+  --dark-gray: #363F5F;
+  --gray: #969CB3;
+  --shape: #FFFFFF;
+  --black: #0B0B0B;
+}
+
+body {
+  background: var(--background);
+}
+
+body, input, button, select {
+  font-family: 'Roboto', sans-serif;
+}
+
+header {
+  background: var(--blue-light);
+}
+
+header .header-container {
+  margin: 0 auto;
+  max-width: 1080px;
+  padding: 32px 24px 64px;
+}
+
+header .header-container h1 {
+  font-size: 3rem;
+  text-align: center;
+  color: var(--shape);
+  margin-bottom: 24px;
+}
+
+main {
+  margin: 0 auto;
+  padding: 0 24px;
+  max-width: 1080px;
+}
+
+main .form-dashboard {
+  gap: 16px;
+  display: flex;
+  margin-top: -48px;
+  align-items: flex-end;
+}
+
+.form-dashboard div {
+  width: 100%;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+}
+
+.form-dashboard label {
+  font-weight: 900; 
+  margin-bottom: 8px;
+  color: var(--shape);
+  font-size: 0.75rem;
+}
+
+.form-dashboard select {
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 8px 12px;
+  border-radius: 4px;
+  border: 1px solid var(--black);
+}
+
+.form-dashboard button {
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 8px 12px;
+  border-radius: 4px;
+  color: var(--black);
+  line-height: 1.375rem;
+  background: var(--shape);
+  border: 1px solid var(--black);
+  transition: all 0.5s;
+}
+
+.form-dashboard button:hover {
+  cursor: pointer;
+  filter: brightness(0.9);
+}
+
+.tables {
+  margin-top: 48px;
+}
+
+.container-table h2 {
+  font-size: 1.8rem;
+  font-weight: 900;
+  text-align: left;
+}
+
+.container-table {
+  overflow-y: auto;
+}
+
+.container-table table {
+  width: 100%;
+  padding: 0.75rem;
+  margin-top: 16px;
+  min-width: 1000px;
+  border-spacing: 0 0.5rem;
+}
+
+.container-table table tr {
+  background: var(--shape);
+}
+
+.container-table table th {
+  max-width: 1.5rem;
+  min-width: 1.5rem;
+  text-align: center;
+  padding: 8px 4px;
+}
+
+.container-table table td {
+  text-align: center;
+  padding: 8px 4px;
+}
+
+.container-table table tr td:first-child, .container-table table tr th:first-child {
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+}
+
+.container-table table tr td:last-child, .container-table table tr th:last-child {
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
+
+@media (max-width: 1080px) {
+  html {
+    font-size: 93.75%;
+  }
+}
+
+@media (max-width: 720px) {
+  html {
+    font-size: 87.5%;
+  }
+}
+
+@media (min-width: 768px) {
+  .form-dashboard label {
+    font-size: 1rem;
+  }
+}
