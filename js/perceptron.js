@@ -11,35 +11,33 @@ function getOptions() {
   const operation = document.getElementById("operation").value;
   const inputType = document.getElementById("input-type").value;
 
+  document.getElementById("tables").innerHTML = "";
+
   handler(operation, inputType);
 }
 
 function handler(operation, inputType) {
-  console.log("operation -> ", operation);
-  // Declaração e inicialização de variáveis
   let fYent = null;
   let generation = 0;
-  let WEIGHT = [0, 0, 0];
+  let WEIGHT = [0, 0, 0, 0];
   let hasWeightVariation = true;
-  
-  
-  // Captura da tabela verdade e alvos de acordo com a operação (AND, OR ou XOR)
-  const { TRUTH_TABLE, TARGET } = DATA[operation];
+
+  const { TRUTH_TABLE } = DATA[inputType];
+  const { TARGET } = DATA[inputType][operation];
   
   while (hasWeightVariation) {
     const allYent = [];
     const allFYent = [];
     const allWeights = [];
-    const allVariations = [];
-    let weightVariation = [[], [], [], []];
+    let weightVariation = [[], [], [], [], [], [], [], []];
     
     generation += 1;
 
-    for (let line = 0; line < 4; line++) {
+    for (let line = 0; line < 8; line++) {
       let yent = 0;
 
       // Cálculo do Yent
-      for (let column = 0; column < 3; column++) {
+      for (let column = 0; column < 4; column++) {
         yent += parseInt(TRUTH_TABLE[line][column] * WEIGHT[column]);
       }
 
@@ -52,11 +50,14 @@ function handler(operation, inputType) {
       weightVariation[line][0] = parseInt(wVariationFirstPart * TRUTH_TABLE[line][0]);
       weightVariation[line][1] = parseInt(wVariationFirstPart * TRUTH_TABLE[line][1]);
       weightVariation[line][2] = parseInt(wVariationFirstPart * TRUTH_TABLE[line][2]);
+      weightVariation[line][3] = parseInt(wVariationFirstPart * TRUTH_TABLE[line][3]);
+
 
       // Atualização dos valores dos pesos
       WEIGHT[0] += parseInt(weightVariation[line][0]);
       WEIGHT[1] += parseInt(weightVariation[line][1]);
       WEIGHT[2] += parseInt(weightVariation[line][2]);
+      WEIGHT[3] += parseInt(weightVariation[line][3]);
 
       allYent.push(yent);
       allFYent.push(fYent);
@@ -67,11 +68,20 @@ function handler(operation, inputType) {
 
     const done = noWeightVariation(weightVariation);
 
+    if (generation === 100 && operation === "xor") {
+      hasWeightVariation = false;
+      alert("A operação XOR é um problema não linear, por isso esse algoritmo não consegue resolver. Foi limitado em 100 épocas para demostração!");
+      continue;
+    }
+
     if (done) {
       hasWeightVariation = false;
       continue;
     }
   }
+
+  const elementResult = document.getElementById("result"); 
+  elementResult.innerText = `Foram geradas ${generation} épocas`;
 }
 
 function getFYent(yent) {
@@ -86,8 +96,8 @@ function getFYent(yent) {
 
 function noWeightVariation(weightVariation) {
   let done = true;
-  for (let i = 0; i < 4; i++) {
-    for (let j = 0; j < 3; j++) {
+  for (let i = 0; i < 8; i++) {
+    for (let j = 0; j < 4; j++) {
       if (weightVariation[i][j] !== 0) {
         done = false;
         break;

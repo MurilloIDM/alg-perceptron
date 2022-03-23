@@ -5,7 +5,7 @@
 }
 
 :root {
-  --background: #F0F2F5;
+  --background: #dfdfdf;
   --green: #33cc95;
   --red: #E52E4D;
   --blue: #5429CC;
@@ -140,6 +140,20 @@ main .form-dashboard {
 .container-table table tr td:last-child, .container-table table thead th:last-child {
   border-top-right-radius: 0.5rem;
   border-bottom-right-radius: 0.5rem;
+}
+
+#result {
+  font-size: 2rem;
+  margin-top: 32px;
+  text-align: center;
+  color: var(--black);
+  font-weight: 900;
+}
+
+.text-description {
+  font-size: 1.2rem;
+  text-align: center;
+  color: var(--shape);
 }
 
 @media (max-width: 1080px) {
